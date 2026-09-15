@@ -29,10 +29,12 @@ RETRY_TIMEOUT = 60
 # model on memory-bandwidth-bound Apple Silicon inference) can legitimately take
 # 600-2800s+ for a single completion. At 600s, aider's own client abandons and
 # retries the identical prompt from scratch every ~600-1800s (openai SDK's default
-# max_retries=2 gives ~3 attempts before raising) -- forever, regardless of any
-# server-side fix, exhausting the benchmark's outer wall-clock budget with zero
-# progress. See eejd/agent-services-hive#608 and py-vllm-mlx#7/#9 for the full
-# diagnostic context this was found under.
+# max_retries=2 gives ~3 attempts before raising), and aider's own outer retry
+# loop (RETRY_TIMEOUT, above) then retries THAT multiple times more -- regardless
+# of any server-side fix, this compounds into many hours of retries with zero
+# progress, comfortably exhausting a benchmark's outer wall-clock budget. See
+# eejd/agent-services-hive#608 and py-vllm-mlx#7/#9 for the full diagnostic
+# context this was found under.
 request_timeout = 3600
 
 DEFAULT_MODEL_NAME = "gpt-4o"
