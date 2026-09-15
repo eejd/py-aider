@@ -440,7 +440,7 @@ class TestModels(unittest.TestCase):
             stream=False,
             temperature=0,
             num_ctx=expected_ctx,
-            timeout=600,
+            timeout=3600,
         )
 
     @patch("aider.models.litellm.completion")
@@ -458,7 +458,7 @@ class TestModels(unittest.TestCase):
             stream=False,
             temperature=0,
             num_ctx=4096,
-            timeout=600,
+            timeout=3600,
         )
 
     @patch("aider.models.litellm.completion")
@@ -474,7 +474,7 @@ class TestModels(unittest.TestCase):
             messages=messages,
             stream=False,
             temperature=0,
-            timeout=600,
+            timeout=3600,
         )
         self.assertNotIn("num_ctx", mock_completion.call_args.kwargs)
 
@@ -504,7 +504,7 @@ class TestModels(unittest.TestCase):
             messages=messages,
             stream=False,
             temperature=0,
-            timeout=600,  # Default timeout
+            timeout=3600,  # Default timeout
         )
 
     @patch("aider.models.litellm.completion")
@@ -533,7 +533,7 @@ class TestModels(unittest.TestCase):
             messages=messages,
             stream=False,
             temperature=0,
-            timeout=600,
+            timeout=3600,
         )
 
         # Test use_temperature=False doesn't send temperature
@@ -552,7 +552,7 @@ class TestModels(unittest.TestCase):
             messages=messages,
             stream=False,
             temperature=0.7,
-            timeout=600,
+            timeout=3600,
         )
 
     def test_gpt_5_5_model_settings(self):
